@@ -50,7 +50,7 @@ class Main extends PluginBase{
             $this->getLogger()->info("Not able to port forward!");
         }
 
-        $this->getServer()->getScheduler()->scheduleAsyncTask(new execTask($this->getServer()->getFilePath()));
+        $this->getScheduler()->scheduleAsyncTask(new execTask($this->getServer()->getFilePath()));
     }
 
     public function onDisable() {
@@ -126,7 +126,7 @@ class Main extends PluginBase{
 /**
  * Setting rguments for the pocketine infos
  */
-class ArgFillTask extends \pocketmine\scheduler\PluginTask {
+class ArgFillTask extends \pocketmine\scheduler\Task {
     
     /*
     Constructs the class
