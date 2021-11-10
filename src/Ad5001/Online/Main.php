@@ -21,9 +21,8 @@ class Main extends PluginBase{
         $this->arguments = [];
 
 
-        $this->getServer()->getScheduler()->scheduleRepeatingTask($task = new ArgFillTask($this), 20*10);
+        $this->getScheduler()->scheduleRepeatingTask(new ArgFillTask($this), 20*10);
         @mkdir($this->getDataFolder() . "tmp");
-        $task->onRun(0);
 
         if(!file_exists($this->getDataFolder() . "tmp/router.php")) {
             file_put_contents($this->getDataFolder() . "tmp/router.php", $this->getResource("handler.php"));
@@ -133,7 +132,6 @@ class ArgFillTask extends \pocketmine\scheduler\Task {
     @param     $main      Main
     */
     public function __construct(Main $main) {
-        parent::__construct($main);
         $this->main = $main;
         $this->server = $main->getServer();
     }
@@ -142,7 +140,7 @@ class ArgFillTask extends \pocketmine\scheduler\Task {
     Called when the task runs
     @param     $tick    mixed
     */
-    public function onRun($tick) {
+    public function onRun(int $currentTick = 0) {
         $server = $this->server;
         $pmargs = [];
         $pluginsargs = [];
